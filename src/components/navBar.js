@@ -1,37 +1,47 @@
 import React from "react"
 import { Link } from "gatsby"
+import { AnchorLink } from "gatsby-plugin-anchor-links";
+import Image from "gatsby-image"
+import { Navbar, Nav } from "react-bootstrap"
+import { graphql, useStaticQuery } from "gatsby"
 
-import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap"
+const query = graphql`
+  {
+    file(relativePath: {eq: "Incredipools.png"}) {
+      childImageSharp {
+        fixed(height: 150, width: 200) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+  }
+`
 
 const CustomNavbar = ({ pageInfo }) => {
-  console.log(pageInfo)
+  const {
+    file: {
+      childImageSharp: { fixed },
+    },
+  } = useStaticQuery(query)
   return (
     <>
       <Navbar variant="dark" expand="lg" id="site-navbar">
         {/* <Container> */}
-        <Link to="/" className="link-no-style">
-          <Navbar.Brand as="span">Gatsby React Bootstrap</Navbar.Brand>
+        <Link to="/">
+          {/* <Navbar.Brand as="span">Incredipools logo</Navbar.Brand>         */}
+          <Image fixed={fixed} />
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto" activeKey={pageInfo && pageInfo.pageName}>
-            <Link to="/page-2" className="link-no-style">
-              <Nav.Link as="span" eventKey="page-2">
-                Page 2
+          <a href="tel:801-123-1234">801-123-1234</a>
+          <AnchorLink to="/#contact" title="Contact Us" className="home" />
+          <AnchorLink to="/services/#contact" stripHash title="Contact Us" className="services" />
+          <Nav activeKey={pageInfo && pageInfo.pageName}>
+            <Link to="/services" className="link-no-style">
+              <Nav.Link as="span" eventKey="services">
+                Services
               </Nav.Link>
             </Link>
-          </Nav>
-          <Nav className="ml-auto">
-            <Form inline onSubmit={e => e.preventDefault()}>
-              <Form.Group>
-                <FormControl
-                  type="text"
-                  placeholder="Fake Search"
-                  className="mr-2"
-                />
-              </Form.Group>
-              <Button>Fake Button</Button>
-            </Form>
           </Nav>
         </Navbar.Collapse>
         {/* </Container> */}

@@ -1,69 +1,43 @@
 import React from "react"
-import { Row, Col, Container, ListGroup } from "react-bootstrap"
+import { Row, Col, Container } from 'react-bootstrap'
+import Helmet from 'react-helmet'
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import About from "../components/about"
+import ServiceSection from "../components/ServiceSection"
+import Examples from "../components/Examples"
+import Reviews from "../components/Reviews"
+import { AnchorLink } from "gatsby-plugin-anchor-links"
 
 const IndexPage = () => (
   <Layout pageInfo={{ pageName: "index" }}>
+      <Helmet
+        bodyAttributes={{
+            class: 'home-page'
+        }}
+    />
     <SEO title="Home" keywords={[`gatsby`, `react`, `bootstrap`]} />
-    <Container className="text-center">
-      <Row>
-        <Col>
-          <p>
-            This is a Gatsby Starter that I frequently use to get jump started
-            on quick website builds. It includes the following packages:
-          </p>
-        </Col>
-      </Row>
-      <Row className="justify-content-center my-3">
-        <Col md="6">
-          <ListGroup>
-            <ListGroup.Item
-              action
-              href="https://getbootstrap.com"
-              target="_blank"
-            >
-              Bootstrap
-            </ListGroup.Item>
-            <ListGroup.Item
-              action
-              href="https://react-bootstrap.github.io/"
-              target="_blank"
-            >
-              react-bootstrap
-            </ListGroup.Item>
-            <ListGroup.Item
-              action
-              href="https://react-icons.netlify.com"
-              target="_blank"
-            >
-              react-icons
-            </ListGroup.Item>
-            <ListGroup.Item
-              action
-              href="https://www.gatsbyjs.org/packages/gatsby-plugin-sass/"
-              target="_blank"
-            >
-              gatsby-plugin-sass
-            </ListGroup.Item>
-          </ListGroup>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <p>
-            This starter also includes a navbar that sticks to the top of the
-            screen when the user scrolls past it, and a footer that stays at the
-            bottom of the screen.
-          </p>
-          <p>
-            For more documentation on these packages and how they work, please
-            refer to the pages linked in the list above.
-          </p>
-        </Col>
-      </Row>
-    </Container>
+     <section id="home" className="d-flex align-items-center position-relative vh-100 cover hero">
+        <Container fluid className="container-fluid-max">
+            <Row>
+                <Col sm="12">
+                    <h1 className="text-white text-center">Incredipools</h1>
+                    <Col lg="6" sm="12" className="border-bottom mx-auto"></Col> 
+                    <Col lg="6" sm="12" className="mx-auto text-center text-white">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, repellat veniam eligendi voluptate quaerat fugit, nam debitis at rem accusamus deleniti eius aliquid molestiae eum harum, placeat vel officia laboriosam.</p>
+                        <AnchorLink to="/#contact" title="Contact us"/>
+                    </Col>
+                </Col>
+            </Row>
+        </Container>
+    </section>
+   <Container>
+    <About />
+    <ServiceSection />
+    <Examples />
+    <Reviews />
+   </Container>
   </Layout>
 )
 

@@ -6,57 +6,46 @@
  */
 
 import React from "react"
-import { StaticQuery, graphql } from "gatsby"
 
 import { Container, Row, Col } from "react-bootstrap"
 
-import Header from "./header"
-import Navbar from "./navBar"
+import NavBar from "./navBar"
+import Footer from "./footer"
+import Contact from "./contact"
+import PageLinks from "./pageLinks"
 
-const Layout = ({ children, pageInfo }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
+const Layout = ({ children, pageInfo }) => {
+    return (
       <>
         <Container fluid className="px-0 main">
-          <Row noGutters className="justify-content-center">
-            <Col>
-              <Header siteTitle={data.site.siteMetadata.title} />
-            </Col>
-          </Row>
-          <Navbar pageInfo={pageInfo} />
+          <header>
+            <NavBar pageInfo={pageInfo}/>
+          </header>
           <Row noGutters>
             <Col>
-              <Container className="mt-5">
                 <main>{children}</main>
-              </Container>
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Col sm="12">
+              <Contact />
             </Col>
           </Row>
         </Container>
         <Container fluid className="px-0">
-          <Row noGutters>
-            <Col className="footer-col">
-              <footer>
-                <span>
-                  © {new Date().getFullYear()}, Built with
-                  {` `}
-                  <a href="https://www.gatsbyjs.org">Gatsby</a>
-                </span>
-              </footer>
+          <Row className="no-gutters">
+            <Col sm="12">
+              <PageLinks/>
+            </Col>
+            <Col sm="12">
+              <Footer />
             </Col>
           </Row>
         </Container>
       </>
-    )}
-  />
-)
+    )
+  }
 
 export default Layout
